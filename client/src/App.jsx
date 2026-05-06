@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ChatBot from './components/ChatBot';
 
 // Public pages
 import Home from './pages/public/Home';
@@ -12,6 +13,10 @@ import InternshipDetail from './pages/public/InternshipDetail';
 // Auth pages
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import EmailVerified from './pages/auth/EmailVerified';
+
+// Profile
+import MyProfile from './pages/profile/MyProfile';
 
 // Student pages
 import StudentDashboard from './pages/student/StudentDashboard';
@@ -27,7 +32,7 @@ import ManageInternships from './pages/company/ManageInternships';
 import InternshipForm from './pages/company/InternshipForm';
 import ReviewApplications from './pages/company/ReviewApplications';
 
-// Admin pages
+import MyCV from './pages/student/MyCV';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AllApplications from './pages/admin/AllApplications';
 import AssignSupervisor from './pages/admin/AssignSupervisor';
@@ -50,6 +55,10 @@ export default function App() {
             {/* Auth */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/email-verified" element={<EmailVerified />} />
+
+            {/* Profile (any authenticated user) */}
+            <Route path="/profile" element={<ProtectedRoute><MyProfile /></ProtectedRoute>} />
 
             {/* Student */}
             <Route path="/student" element={<ProtectedRoute allowedRoles={['student']}><StudentDashboard /></ProtectedRoute>} />
@@ -58,6 +67,7 @@ export default function App() {
             <Route path="/student/evaluations" element={<ProtectedRoute allowedRoles={['student']}><MyEvaluations /></ProtectedRoute>} />
             <Route path="/student/notifications" element={<ProtectedRoute allowedRoles={['student']}><MyNotifications /></ProtectedRoute>} />
             <Route path="/student/complaints" element={<ProtectedRoute allowedRoles={['student']}><MyComplaints /></ProtectedRoute>} />
+            <Route path="/student/cv" element={<ProtectedRoute allowedRoles={['student']}><MyCV /></ProtectedRoute>} />
 
             {/* Company */}
             <Route path="/company" element={<ProtectedRoute allowedRoles={['company']}><CompanyDashboard /></ProtectedRoute>} />
@@ -79,6 +89,7 @@ export default function App() {
           </Routes>
         </div>
         <Footer />
+        <ChatBot />
       </BrowserRouter>
     </AuthProvider>
   );

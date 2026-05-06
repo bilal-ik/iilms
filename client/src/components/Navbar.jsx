@@ -2,61 +2,64 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const ROLE_HOME = { admin: '/admin', student: '/student', company: '/company' };
-
 const studentLinks = [
-  { to: '/student', label: 'Dashboard' },
-  { to: '/student/browse', label: 'Browse Internships' },
-  { to: '/student/applications', label: 'My Applications' },
-  { to: '/student/evaluations', label: 'My Evaluations' },
-  { to: '/student/notifications', label: 'Notifications' },
-  { to: '/student/complaints', label: 'Complaints' },
+  { to: '/student',               label: '🏠 Dashboard' },
+  { to: '/student/browse',        label: '🔍 Browse Internships' },
+  { to: '/student/applications',  label: '📋 My Applications' },
+  { to: '/student/evaluations',   label: '⭐ My Evaluations' },
+  { to: '/student/notifications', label: '🔔 Notifications' },
+  { to: '/student/complaints',    label: '💬 Complaints' },
+  { to: '/student/cv',            label: '📄 My CV / Resume' },
+  { to: '/profile',               label: '👤 My Profile' },
 ];
 
 const companyLinks = [
-  { to: '/company', label: 'Dashboard' },
-  { to: '/company/internships', label: 'Manage Internships' },
-  { to: '/company/internships/new', label: 'Post Internship' },
-  { to: '/company/applications', label: 'Review Applications' },
+  { to: '/company',                   label: '🏠 Dashboard' },
+  { to: '/company/internships',       label: '📋 Manage Internships' },
+  { to: '/company/internships/new',   label: '➕ Post Internship' },
+  { to: '/company/applications',      label: '👥 Review Applications' },
+  { to: '/profile',                   label: '👤 Company Profile' },
 ];
 
 const adminLinks = [
-  { to: '/admin', label: 'Dashboard' },
-  { to: '/admin/applications', label: 'All Applications' },
-  { to: '/admin/supervisors', label: 'Assign Supervisors' },
-  { to: '/admin/evaluations', label: 'Evaluations' },
-  { to: '/admin/recommendations', label: 'Recommendation Letters' },
-  { to: '/admin/complaints', label: 'Manage Complaints' },
+  { to: '/admin',                  label: '🏠 Dashboard' },
+  { to: '/admin/applications',     label: '📋 All Applications' },
+  { to: '/admin/supervisors',      label: '👨‍🏫 Assign Supervisors' },
+  { to: '/admin/evaluations',      label: '⭐ Evaluations' },
+  { to: '/admin/recommendations',  label: '📄 Recommendation Letters' },
+  { to: '/admin/complaints',       label: '💬 Manage Complaints' },
 ];
 
-function DropdownMenu({ label, links, icon }) {
+function DropdownMenu({ label, links }) {
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
   return (
     <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button
-        className={`flex items-center gap-1 px-3 py-2 rounded-lg font-medium text-sm transition-all`}
-        style={{ color: '#e9d5ff' }}
-        onMouseEnter={e => e.currentTarget.style.background = 'rgba(168,85,247,0.15)'}
-        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
         onClick={() => setOpen(!open)}
+        className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all"
+        style={{ color: '#374151' }}
+        onMouseEnter={e => { e.currentTarget.style.background = '#EEF2FF'; e.currentTarget.style.color = '#4F46E5'; }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#374151'; }}
       >
-        {icon && <span>{icon}</span>}
         {label}
         <svg className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
       {open && (
-        <div className="absolute top-full left-0 mt-1 w-52 rounded-xl shadow-2xl z-50 overflow-hidden"
-          style={{ background: 'rgba(26,5,51,0.97)', border: '1px solid rgba(168,85,247,0.2)' }}>
+        <div className="absolute top-full left-0 mt-1 w-56 rounded-xl z-50 overflow-hidden"
+          style={{ background: '#FFFFFF', border: '1.5px solid #E5E7EB', boxShadow: '0 8px 30px rgba(79,70,229,0.12)' }}>
           {links.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              onClick={() => setOpen(false)}
-              className={`block px-4 py-2.5 text-sm hover:bg-blue-600/40 transition-colors ${location.pathname === l.to ? 'bg-blue-600/30 text-blue-300' : 'text-slate-200'}`}
+            <Link key={l.to} to={l.to} onClick={() => setOpen(false)}
+              className="block px-4 py-2.5 text-sm transition-colors"
+              style={{
+                color: location.pathname === l.to ? '#4F46E5' : '#374151',
+                background: location.pathname === l.to ? '#EEF2FF' : 'transparent',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#F5F3FF'; e.currentTarget.style.color = '#4F46E5'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = location.pathname === l.to ? '#EEF2FF' : 'transparent'; e.currentTarget.style.color = location.pathname === l.to ? '#4F46E5' : '#374151'; }}
             >
               {l.label}
             </Link>
@@ -82,33 +85,44 @@ export default function Navbar() {
   const roleLabel = user?.role === 'student' ? '🎓 Student' : user?.role === 'company' ? '🏢 Company' : user?.role === 'admin' ? '⚙️ Admin' : '';
 
   return (
-    <header className="sticky top-0 z-40" style={{ background: 'rgba(10,20,40,0.92)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+    <header className="sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 font-bold text-xl text-white">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-lg flex items-center justify-center text-sm font-black text-slate-900">
+          <Link to="/" className="flex items-center gap-2 font-bold text-xl">
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center text-sm font-black text-white"
+              style={{ background: 'linear-gradient(135deg, #4F46E5, #7C3AED)' }}>
               II
             </div>
-            <span className="hidden sm:block">IILMS</span>
+            <span className="hidden sm:block" style={{ color: '#1E1B4B' }}>IILMS</span>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1 text-slate-200">
-            <Link to="/" className="px-3 py-2 rounded-lg hover:bg-white/10 text-sm font-medium transition-all">🏠 Home</Link>
-            <Link to="/internships" className="px-3 py-2 rounded-lg hover:bg-white/10 text-sm font-medium transition-all">📋 Internships</Link>
+          <nav className="hidden md:flex items-center gap-1">
+            <Link to="/"
+              className="px-3 py-2 rounded-lg text-sm font-medium transition-all"
+              style={{ color: '#374151' }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#EEF2FF'; e.currentTarget.style.color = '#4F46E5'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#374151'; }}>
+              🏠 Home
+            </Link>
+            <Link to="/internships"
+              className="px-3 py-2 rounded-lg text-sm font-medium transition-all"
+              style={{ color: '#374151' }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#EEF2FF'; e.currentTarget.style.color = '#4F46E5'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#374151'; }}>
+              📋 Internships
+            </Link>
 
-            {/* Role-based dropdown */}
-            {user?.role === 'student' && <DropdownMenu label="🎓 Student" links={studentLinks} />}
-            {user?.role === 'company' && <DropdownMenu label="🏢 Company" links={companyLinks} />}
-            {user?.role === 'admin' && <DropdownMenu label="⚙️ University" links={adminLinks} />}
+            {user?.role === 'student'  && <DropdownMenu label="🎓 Student"    links={studentLinks} />}
+            {user?.role === 'company'  && <DropdownMenu label="🏢 Company"    links={companyLinks} />}
+            {user?.role === 'admin'    && <DropdownMenu label="🏛️ University" links={adminLinks} />}
 
-            {/* More dropdown (always visible) */}
-            <DropdownMenu label="More" links={[
-              { to: '/internships', label: '🔍 Browse All Internships' },
-              { to: '/register', label: '📝 Register' },
-              { to: '/login', label: '🔐 Login' },
+            <DropdownMenu label="More ▾" links={[
+              { to: '/internships', label: '🔍 Browse Internships' },
+              { to: '/register',    label: '📝 Register' },
+              { to: '/login',       label: '🔐 Login' },
             ]} />
           </nav>
 
@@ -116,19 +130,30 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             {!user ? (
               <>
-                <Link to="/login" className="px-4 py-1.5 text-sm rounded-lg border border-white/20 hover:bg-white/10 transition-all">Login</Link>
-                <Link to="/register" className="px-4 py-1.5 text-sm rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-medium transition-all">Register</Link>
+                <Link to="/login"
+                  className="px-4 py-1.5 text-sm rounded-lg font-medium transition-all"
+                  style={{ color: '#4F46E5', border: '1.5px solid #C7D2FE' }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#EEF2FF'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                  Login
+                </Link>
+                <Link to="/register"
+                  className="px-4 py-1.5 text-sm rounded-lg font-semibold text-white transition-all hover:scale-105"
+                  style={{ background: 'linear-gradient(135deg, #4F46E5, #7C3AED)', boxShadow: '0 2px 10px rgba(79,70,229,0.3)' }}>
+                  Register
+                </Link>
               </>
             ) : (
               <div className="flex items-center gap-3">
                 <div className="text-right">
-                  <p className="text-xs text-slate-400">{roleLabel}</p>
-                  <p className="text-sm font-medium text-white">{user.full_name}</p>
+                  <p className="text-xs font-medium" style={{ color: '#4F46E5' }}>{roleLabel}</p>
+                  <p className="text-sm font-semibold" style={{ color: '#1E1B4B' }}>{user.full_name}</p>
                 </div>
-                <button
-                  onClick={handleLogout}
-                  className="px-3 py-1.5 text-sm rounded-lg border border-red-400/30 text-red-400 hover:bg-red-500/10 transition-all"
-                >
+                <button onClick={handleLogout}
+                  className="px-3 py-1.5 text-sm rounded-lg font-medium transition-all"
+                  style={{ color: '#DC2626', border: '1.5px solid #FECACA' }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#FEF2F2'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                   Logout
                 </button>
               </div>
@@ -136,37 +161,39 @@ export default function Navbar() {
           </div>
 
           {/* Hamburger */}
-          <button
-            className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-all"
+          <button className="md:hidden p-2 rounded-lg transition-all"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
-            <div className="w-5 h-0.5 bg-white mb-1 transition-all" style={{ transform: mobileOpen ? 'rotate(45deg) translate(3px, 6px)' : 'none' }} />
-            <div className="w-5 h-0.5 bg-white mb-1 transition-all" style={{ opacity: mobileOpen ? 0 : 1 }} />
-            <div className="w-5 h-0.5 bg-white transition-all" style={{ transform: mobileOpen ? 'rotate(-45deg) translate(3px, -6px)' : 'none' }} />
+            style={{ color: '#374151' }}
+            onMouseEnter={e => e.currentTarget.style.background = '#EEF2FF'}
+            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+            <div className="w-5 h-0.5 mb-1 rounded" style={{ background: '#374151', transform: mobileOpen ? 'rotate(45deg) translate(3px, 6px)' : 'none' }} />
+            <div className="w-5 h-0.5 mb-1 rounded" style={{ background: '#374151', opacity: mobileOpen ? 0 : 1 }} />
+            <div className="w-5 h-0.5 rounded" style={{ background: '#374151', transform: mobileOpen ? 'rotate(-45deg) translate(3px, -6px)' : 'none' }} />
           </button>
         </div>
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden pb-4 border-t border-white/10 mt-2 pt-3 space-y-1">
-            <Link to="/" onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg hover:bg-white/10 text-sm">🏠 Home</Link>
-            <Link to="/internships" onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg hover:bg-white/10 text-sm">📋 Internships</Link>
+          <div className="md:hidden pb-4 mt-2 pt-3 space-y-1 rounded-xl mb-2"
+            style={{ borderTop: '1px solid #E5E7EB', background: '#FFFFFF', boxShadow: '0 4px 20px rgba(79,70,229,0.1)' }}>
+            <Link to="/" onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg text-sm" style={{ color: '#374151' }}>🏠 Home</Link>
+            <Link to="/internships" onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg text-sm" style={{ color: '#374151' }}>📋 Internships</Link>
             {roleLinks.map((l) => (
-              <Link key={l.to} to={l.to} onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg hover:bg-white/10 text-sm pl-6">
+              <Link key={l.to} to={l.to} onClick={() => setMobileOpen(false)}
+                className="block px-6 py-2.5 rounded-lg text-sm" style={{ color: '#4F46E5' }}>
                 {l.label}
               </Link>
             ))}
-            <div className="border-t border-white/10 pt-3 mt-3">
+            <div className="pt-3 mt-2" style={{ borderTop: '1px solid #F3F4F6' }}>
               {!user ? (
                 <>
-                  <Link to="/login" onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg hover:bg-white/10 text-sm">Login</Link>
-                  <Link to="/register" onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg bg-blue-600/30 hover:bg-blue-600/50 text-sm">Register</Link>
+                  <Link to="/login" onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg text-sm font-medium" style={{ color: '#4F46E5' }}>Login</Link>
+                  <Link to="/register" onClick={() => setMobileOpen(false)} className="block mx-4 mt-1 px-4 py-2.5 rounded-lg text-sm font-semibold text-white text-center" style={{ background: 'linear-gradient(135deg, #4F46E5, #7C3AED)' }}>Register</Link>
                 </>
               ) : (
                 <>
-                  <p className="px-4 py-2 text-sm text-slate-400">{user.full_name} · {user.role}</p>
-                  <button onClick={handleLogout} className="block w-full text-left px-4 py-2.5 rounded-lg text-red-400 hover:bg-red-500/10 text-sm">Logout</button>
+                  <p className="px-4 py-2 text-sm font-medium" style={{ color: '#6B7280' }}>{user.full_name} · {user.role}</p>
+                  <button onClick={handleLogout} className="block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium" style={{ color: '#DC2626' }}>Logout</button>
                 </>
               )}
             </div>

@@ -37,15 +37,15 @@ export default function Login() {
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         {/* Card */}
-        <div className="glass p-8 rounded-2xl border border-white/10">
+        <div className="glass p-8 rounded-2xl" style={{ background: '#FFFFFF', borderColor: '#E5E7EB' }}>
           {/* Header */}
           <div className="text-center mb-8">
             <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4"
               style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)' }}>
               🔐
             </div>
-            <h1 className="text-2xl font-bold text-white">Welcome Back</h1>
-            <p className="text-slate-400 text-sm mt-1">Sign in to your IILMS account</p>
+            <h1 className="text-2xl font-bold" style={{ color: '#1E1B4B' }}>Welcome Back</h1>
+            <p className="text-sm mt-1" style={{ color: '#6B7280' }}>Sign in to your IILMS account</p>
           </div>
 
           {/* Error */}
@@ -58,7 +58,7 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Email Address</label>
+              <label className="block text-sm font-medium mb-1.5" style={{ color: '#374151' }}>Email Address</label>
               <input
                 type="email"
                 value={form.email}
@@ -70,7 +70,7 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Password</label>
+              <label className="block text-sm font-medium mb-1.5" style={{ color: '#374151' }}>Password</label>
               <input
                 type="password"
                 value={form.password}
@@ -91,21 +91,21 @@ export default function Login() {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-400">
+          <p className="mt-6 text-center text-sm" style={{ color: '#6B7280' }}>
             Don't have an account?{' '}
-            <Link to="/register" className="text-blue-400 hover:text-blue-300 font-medium">
+            <Link to="/register" className="font-semibold" style={{ color: '#4F46E5' }}>
               Create one
             </Link>
           </p>
         </div>
 
         {/* Demo accounts hint */}
-        <div className="mt-4 glass p-4 rounded-xl border border-white/10 text-xs text-slate-400">
-          <p className="font-medium text-slate-300 mb-2">Demo accounts (password: <code className="text-blue-400">password</code>)</p>
-          <div className="space-y-1">
-            <p>🎓 Student: <span className="text-slate-300">student1@uni.edu</span></p>
-            <p>🏢 Company: <span className="text-slate-300">hr@techcorp.com</span></p>
-            <p>⚙️ Admin: <span className="text-slate-300">admin1@iilms.edu</span></p>
+        <div className="mt-4 glass p-4 rounded-xl text-xs" style={{ background: '#EEF2FF', borderColor: '#C7D2FE' }}>
+          <p className="font-semibold mb-2" style={{ color: '#4F46E5' }}>Demo accounts (password: <code>password</code>)</p>
+          <div className="space-y-1" style={{ color: '#374151' }}>
+            <p>🎓 Student: <span className="font-medium">student1@uni.edu</span></p>
+            <p>🏢 Company: <span className="font-medium">hr@techcorp.com</span></p>
+            <p>⚙️ Admin: <span className="font-medium">admin1@iilms.edu</span></p>
           </div>
         </div>
       </div>

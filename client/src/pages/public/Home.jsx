@@ -2,97 +2,39 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const stats = [
-  { value: '500+', label: 'Internships Posted' },
-  { value: '1,200+', label: 'Students Placed' },
-  { value: '80+', label: 'Partner Companies' },
-  { value: '95%', label: 'Satisfaction Rate' },
+  { value: '500+', label: 'Internships Posted',  color: '#4F46E5', bg: '#EEF2FF' },
+  { value: '1,200+', label: 'Students Placed',   color: '#7C3AED', bg: '#F5F3FF' },
+  { value: '80+',  label: 'Partner Companies',   color: '#0EA5E9', bg: '#E0F2FE' },
+  { value: '95%',  label: 'Satisfaction Rate',   color: '#059669', bg: '#D1FAE5' },
 ];
 
 const testimonials = [
-  {
-    name: 'Sarah Chen',
-    role: 'Computer Science Student',
-    university: 'University of Technology',
-    avatar: '👩‍💻',
-    text: 'IILMS made finding my internship so easy. I applied to 5 companies in one afternoon and got accepted within a week. The tracking system kept me updated every step of the way.',
-    rating: 5,
-  },
-  {
-    name: 'Ahmad Razali',
-    role: 'HR Manager',
-    company: 'TechCorp Malaysia',
-    avatar: '👨‍💼',
-    text: 'As a company, we used to manage internship applications through email. IILMS centralized everything — we can now review, accept, and evaluate interns all in one place.',
-    rating: 5,
-  },
-  {
-    name: 'Dr. Nurul Huda',
-    role: 'Internship Coordinator',
-    university: 'National University',
-    avatar: '👩‍🏫',
-    text: 'The supervisor assignment and evaluation features are exactly what we needed. We can now monitor all our students\' internships and generate recommendation letters instantly.',
-    rating: 5,
-  },
-  {
-    name: 'Marcus Lim',
-    role: 'Software Engineering Student',
-    university: 'Institute of Technology',
-    avatar: '👨‍🎓',
-    text: 'I loved how transparent the process was. I could see my application status in real-time and received notifications whenever something changed. Highly recommend!',
-    rating: 5,
-  },
-  {
-    name: 'Priya Sharma',
-    role: 'Recruitment Lead',
-    company: 'GreenCo Solutions',
-    avatar: '👩‍💼',
-    text: 'The quality of student applicants through IILMS is excellent. The platform pre-screens candidates and the evaluation system helps us give proper feedback.',
-    rating: 5,
-  },
-  {
-    name: 'Prof. James Wong',
-    role: 'Dean of Engineering',
-    university: 'City University',
-    avatar: '👨‍🏫',
-    text: 'IILMS has transformed how our faculty manages internships. The complaint handling system ensures student welfare is protected throughout the placement.',
-    rating: 5,
-  },
+  { name: 'Sarah Chen',     role: 'CS Student',           org: 'University of Technology', avatar: '👩‍💻', text: 'IILMS made finding my internship so easy. I applied to 5 companies in one afternoon and got accepted within a week!', rating: 5 },
+  { name: 'Ahmad Razali',   role: 'HR Manager',            org: 'TechCorp Malaysia',        avatar: '👨‍💼', text: 'IILMS centralized everything — we can now review, accept, and evaluate interns all in one place. Game changer.', rating: 5 },
+  { name: 'Dr. Nurul Huda', role: 'Internship Coordinator',org: 'National University',      avatar: '👩‍🏫', text: 'The supervisor assignment and evaluation features are exactly what we needed. Recommendation letters in seconds!', rating: 5 },
+  { name: 'Marcus Lim',     role: 'Software Eng. Student', org: 'Institute of Technology',  avatar: '👨‍🎓', text: 'I could see my application status in real-time and received notifications whenever something changed. Love it!', rating: 5 },
+  { name: 'Priya Sharma',   role: 'Recruitment Lead',      org: 'GreenCo Solutions',        avatar: '👩‍💼', text: 'The quality of student applicants through IILMS is excellent. The evaluation system helps us give proper feedback.', rating: 5 },
+  { name: 'Prof. James Wong',role: 'Dean of Engineering',  org: 'City University',          avatar: '👨‍🏫', text: 'IILMS transformed how our faculty manages internships. The complaint system ensures student welfare is protected.', rating: 5 },
 ];
 
 const features = [
-  {
-    icon: '🎓',
-    title: 'For Students',
-    desc: 'Browse hundreds of internship opportunities, track your applications in real-time, and receive evaluations and recommendation letters.',
-    link: '/student',
-    gradient: 'linear-gradient(135deg, rgba(168,85,247,0.2), rgba(34,211,238,0.15))',
-    border: 'rgba(168,85,247,0.4)',
-    accent: '#a855f7',
-  },
-  {
-    icon: '🏢',
-    title: 'For Companies',
-    desc: 'Post internship listings, review applicants, accept or reject with one click, and evaluate intern performance.',
-    link: '/company',
-    gradient: 'linear-gradient(135deg, rgba(249,115,22,0.2), rgba(234,179,8,0.15))',
-    border: 'rgba(249,115,22,0.4)',
-    accent: '#f97316',
-  },
-  {
-    icon: '🏛️',
-    title: 'For Universities',
-    desc: 'Oversee the full internship lifecycle, assign supervisors, manage complaints, and generate recommendation letters.',
-    link: '/admin',
-    gradient: 'linear-gradient(135deg, rgba(74,222,128,0.2), rgba(34,211,238,0.15))',
-    border: 'rgba(74,222,128,0.4)',
-    accent: '#4ade80',
-  },
+  { icon: '🎓', title: 'For Students',     desc: 'Browse internships, apply in one click, track status, view evaluations and get recommendation letters.', link: '/student',     bg: '#EEF2FF', border: '#C7D2FE', accent: '#4F46E5', tag: 'Student Portal' },
+  { icon: '🏢', title: 'For Companies',    desc: 'Post listings, review applicants, accept or reject with one click, and evaluate intern performance.',    link: '/company',     bg: '#FFF7ED', border: '#FED7AA', accent: '#EA580C', tag: 'Company Portal' },
+  { icon: '🏛️', title: 'For Universities', desc: 'Oversee the full lifecycle, assign supervisors, manage complaints, and generate recommendation letters.', link: '/admin',       bg: '#F0FDF4', border: '#BBF7D0', accent: '#059669', tag: 'Admin Portal' },
+];
+
+const steps = [
+  { n: '1', icon: '📢', title: 'Company Posts',      desc: 'Industry partners post internship opportunities', color: '#EA580C', bg: '#FFF7ED' },
+  { n: '2', icon: '🔍', title: 'Student Applies',    desc: 'Students browse and submit applications',         color: '#4F46E5', bg: '#EEF2FF' },
+  { n: '3', icon: '✅', title: 'Admin Reviews',      desc: 'University admin oversees the process',           color: '#0EA5E9', bg: '#E0F2FE' },
+  { n: '4', icon: '👨‍🏫', title: 'Supervisor Assigned',desc: 'Academic supervisor monitors the intern',        color: '#7C3AED', bg: '#F5F3FF' },
+  { n: '5', icon: '🏆', title: 'Evaluation & Letter',desc: 'Performance evaluated, letter generated',         color: '#059669', bg: '#D1FAE5' },
 ];
 
 const announcements = [
-  { date: 'May 2026', title: 'Summer Internship Season Open', desc: 'Over 50 new internship positions available across tech, finance, and engineering sectors.' },
-  { date: 'Apr 2026', title: 'New Company Partners Onboarded', desc: 'Welcome TechCorp, GreenCo, and 8 more industry partners to the IILMS platform.' },
-  { date: 'Mar 2026', title: 'Evaluation System Upgraded', desc: 'Supervisors can now submit detailed performance evaluations with structured scoring.' },
+  { date: 'May 2026', title: 'Summer Internship Season Open',   desc: 'Over 50 new positions available across tech, finance, and engineering.', color: '#4F46E5', bg: '#EEF2FF' },
+  { date: 'Apr 2026', title: 'New Company Partners Onboarded',  desc: 'Welcome TechCorp, GreenCo, and 8 more industry partners.',              color: '#EA580C', bg: '#FFF7ED' },
+  { date: 'Mar 2026', title: 'Evaluation System Upgraded',      desc: 'Supervisors can now submit detailed evaluations with structured scoring.',color: '#059669', bg: '#F0FDF4' },
 ];
 
 export default function Home() {
@@ -101,26 +43,26 @@ export default function Home() {
   return (
     <div className="min-h-screen">
 
-      {/* ── Hero Section ── */}
-      <section className="relative overflow-hidden py-24 px-6">
-        {/* Decorative blobs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%)' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 70%)' }} />
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden py-20 md:py-28 px-6"
+        style={{ background: 'linear-gradient(135deg, #EEF2FF 0%, #F5F3FF 50%, #E0F2FE 100%)' }}>
+        {/* Decorative shapes */}
+        <div className="absolute top-0 right-0 w-72 h-72 rounded-full blur-3xl pointer-events-none opacity-40"
+          style={{ background: 'radial-gradient(circle, #A78BFA, transparent)' }} />
+        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl pointer-events-none opacity-30"
+          style={{ background: 'radial-gradient(circle, #6366F1, transparent)' }} />
 
         <div className="max-w-5xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-medium mb-6"
-            style={{ background: 'rgba(168,85,247,0.15)', border: '1px solid rgba(168,85,247,0.4)', color: '#d8b4fe' }}>
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6"
+            style={{ background: '#EEF2FF', border: '1.5px solid #C7D2FE', color: '#4F46E5' }}>
             🚀 Connecting Universities · Students · Industry
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight" style={{ color: '#1E1B4B' }}>
             Your Internship
             <span className="block" style={{
-              background: 'linear-gradient(135deg, #a855f7 0%, #f97316 50%, #22d3ee 100%)',
+              background: 'linear-gradient(135deg, #4F46E5 0%, #A78BFA 50%, #0EA5E9 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -129,8 +71,8 @@ export default function Home() {
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: '#c4b5fd' }}>
-            IILMS is a centralized platform that streamlines the full internship lifecycle — from posting and applying to supervision, evaluation, and certification.
+          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: '#4B5563' }}>
+            IILMS streamlines the full internship lifecycle — from posting and applying to supervision, evaluation, and certification. All in one place.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -138,19 +80,19 @@ export default function Home() {
               <>
                 <Link to="/register"
                   className="px-8 py-3.5 rounded-xl text-white font-semibold text-lg transition-all hover:scale-105"
-                  style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)', boxShadow: '0 4px 25px rgba(124,58,237,0.5)' }}>
+                  style={{ background: 'linear-gradient(135deg, #4F46E5, #7C3AED)', boxShadow: '0 4px 20px rgba(79,70,229,0.35)' }}>
                   Get Started Free ✨
                 </Link>
                 <Link to="/internships"
                   className="px-8 py-3.5 rounded-xl font-semibold text-lg transition-all hover:scale-105"
-                  style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(168,85,247,0.3)', color: '#e9d5ff' }}>
+                  style={{ background: '#FFFFFF', border: '2px solid #C7D2FE', color: '#4F46E5' }}>
                   Browse Internships →
                 </Link>
               </>
             ) : (
               <Link to={user.role === 'admin' ? '/admin' : user.role === 'company' ? '/company' : '/student'}
                 className="px-8 py-3.5 rounded-xl text-white font-semibold text-lg transition-all hover:scale-105"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)', boxShadow: '0 4px 25px rgba(124,58,237,0.5)' }}>
+                style={{ background: 'linear-gradient(135deg, #4F46E5, #7C3AED)', boxShadow: '0 4px 20px rgba(79,70,229,0.35)' }}>
                 Go to Dashboard →
               </Link>
             )}
@@ -161,15 +103,13 @@ export default function Home() {
       {/* ── Stats ── */}
       <section className="py-12 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
-          {stats.map((s, i) => {
-            const colors = ['#a855f7', '#f97316', '#22d3ee', '#4ade80'];
-            return (
-              <div key={s.label} className="glass p-6 text-center">
-                <p className="text-3xl font-black mb-1" style={{ color: colors[i] }}>{s.value}</p>
-                <p className="text-sm" style={{ color: '#c4b5fd' }}>{s.label}</p>
-              </div>
-            );
-          })}
+          {stats.map((s) => (
+            <div key={s.label} className="glass p-6 text-center hover:scale-105 transition-all"
+              style={{ background: s.bg, borderColor: 'transparent' }}>
+              <p className="text-3xl font-black mb-1" style={{ color: s.color }}>{s.value}</p>
+              <p className="text-sm font-medium" style={{ color: '#6B7280' }}>{s.label}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -177,18 +117,22 @@ export default function Home() {
       <section className="py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Built for Everyone</h2>
-            <p style={{ color: '#c4b5fd' }} className="max-w-xl mx-auto">One platform, three portals — each designed for a specific role in the internship ecosystem.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: '#1E1B4B' }}>Built for Everyone</h2>
+            <p style={{ color: '#6B7280' }} className="max-w-xl mx-auto">One platform, three portals — each designed for a specific role in the internship ecosystem.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {features.map((f) => (
               <Link key={f.title} to={f.link}
                 className="glass p-6 hover:scale-105 transition-all cursor-pointer block"
-                style={{ background: f.gradient, borderColor: f.border }}>
-                <div className="text-4xl mb-4">{f.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-2">{f.title}</h3>
-                <p style={{ color: '#e9d5ff' }} className="text-sm leading-relaxed">{f.desc}</p>
-                <p className="text-sm mt-4 font-medium" style={{ color: f.accent }}>Learn more →</p>
+                style={{ background: f.bg, borderColor: f.border }}>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4"
+                  style={{ background: f.border, color: f.accent }}>
+                  {f.tag}
+                </div>
+                <div className="text-4xl mb-3">{f.icon}</div>
+                <h3 className="text-xl font-bold mb-2" style={{ color: '#1E1B4B' }}>{f.title}</h3>
+                <p style={{ color: '#6B7280' }} className="text-sm leading-relaxed">{f.desc}</p>
+                <p className="text-sm mt-4 font-semibold" style={{ color: f.accent }}>Learn more →</p>
               </Link>
             ))}
           </div>
@@ -196,25 +140,21 @@ export default function Home() {
       </section>
 
       {/* ── How It Works ── */}
-      <section className="py-16 px-6">
+      <section className="py-16 px-6" style={{ background: 'linear-gradient(135deg, #F5F3FF, #EEF2FF)' }}>
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">How It Works</h2>
-            <p style={{ color: '#c4b5fd' }}>A simple 5-step process from posting to certification.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: '#1E1B4B' }}>How It Works</h2>
+            <p style={{ color: '#6B7280' }}>A simple 5-step process from posting to certification.</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {[
-              { step: '01', icon: '📢', title: 'Company Posts', desc: 'Industry partners post internship opportunities', color: '#f97316' },
-              { step: '02', icon: '🔍', title: 'Student Applies', desc: 'Students browse and submit applications', color: '#a855f7' },
-              { step: '03', icon: '✅', title: 'Admin Reviews', desc: 'University admin oversees the process', color: '#22d3ee' },
-              { step: '04', icon: '👨‍🏫', title: 'Supervisor Assigned', desc: 'Academic supervisor monitors the intern', color: '#4ade80' },
-              { step: '05', icon: '🏆', title: 'Evaluation & Letter', desc: 'Performance evaluated, letter generated', color: '#f59e0b' },
-            ].map((item) => (
-              <div key={item.step} className="glass p-4 text-center">
-                <div className="text-xs font-bold mb-2" style={{ color: item.color }}>{item.step}</div>
-                <div className="text-2xl mb-2">{item.icon}</div>
-                <h4 className="text-white font-semibold text-sm mb-1">{item.title}</h4>
-                <p className="text-xs" style={{ color: '#c4b5fd' }}>{item.desc}</p>
+            {steps.map((s) => (
+              <div key={s.n} className="glass p-4 text-center hover:scale-105 transition-all"
+                style={{ background: s.bg, borderColor: 'transparent' }}>
+                <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-black mx-auto mb-2 text-white"
+                  style={{ background: s.color }}>{s.n}</div>
+                <div className="text-2xl mb-2">{s.icon}</div>
+                <h4 className="font-bold text-sm mb-1" style={{ color: '#1E1B4B' }}>{s.title}</h4>
+                <p className="text-xs" style={{ color: '#6B7280' }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -225,59 +165,49 @@ export default function Home() {
       <section className="py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-white mb-2">📣 Announcements</h2>
-            <p style={{ color: '#c4b5fd' }}>Latest news from the IILMS platform.</p>
+            <h2 className="text-3xl font-bold mb-2" style={{ color: '#1E1B4B' }}>📣 Announcements</h2>
+            <p style={{ color: '#6B7280' }}>Latest news from the IILMS platform.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-5">
-            {announcements.map((a, i) => {
-              const accents = ['rgba(168,85,247,0.3)', 'rgba(249,115,22,0.3)', 'rgba(34,211,238,0.3)'];
-              return (
-                <div key={a.title} className="glass p-5 transition-all hover:scale-[1.02]"
-                  style={{ borderColor: accents[i] }}>
-                  <span className="text-xs font-medium" style={{ color: '#f97316' }}>{a.date}</span>
-                  <h3 className="text-white font-semibold mt-1 mb-2">{a.title}</h3>
-                  <p className="text-sm" style={{ color: '#c4b5fd' }}>{a.desc}</p>
-                </div>
-              );
-            })}
+            {announcements.map((a) => (
+              <div key={a.title} className="glass p-5 hover:scale-[1.02] transition-all"
+                style={{ background: a.bg, borderColor: 'transparent' }}>
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white"
+                  style={{ background: a.color }}>{a.date}</span>
+                <h3 className="font-bold mt-3 mb-1" style={{ color: '#1E1B4B' }}>{a.title}</h3>
+                <p className="text-sm" style={{ color: '#6B7280' }}>{a.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ── Testimonials Carousel ── */}
-      <section className="py-16">
+      <section className="py-16" style={{ background: 'linear-gradient(135deg, #EEF2FF, #F5F3FF)' }}>
         <div className="text-center mb-12 px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">💬 What People Say</h2>
-          <p className="text-slate-400 max-w-xl mx-auto">Trusted by students, companies, and universities across the country.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: '#1E1B4B' }}>💬 What People Say</h2>
+          <p style={{ color: '#6B7280' }} className="max-w-xl mx-auto">Trusted by students, companies, and universities across the country.</p>
         </div>
-
-        {/* Infinite scroll carousel — duplicated for seamless loop */}
         <div className="testimonials-wrapper">
           <div className="testimonials-track">
-            {/* Render twice for seamless infinite loop */}
             {[...testimonials, ...testimonials].map((t, idx) => (
-              <div
-                key={idx}
-                className="glass flex flex-col border border-white/10 hover:border-blue-500/30"
-                style={{ minWidth: '320px', maxWidth: '320px', padding: '1.5rem' }}
-              >
-                {/* Stars */}
+              <div key={idx} className="glass flex flex-col"
+                style={{ minWidth: '300px', maxWidth: '300px', padding: '1.5rem', background: '#FFFFFF', borderColor: '#E5E7EB' }}>
                 <div className="flex gap-0.5 mb-3">
                   {Array.from({ length: t.rating }).map((_, i) => (
                     <span key={i} className="text-yellow-400 text-sm">★</span>
                   ))}
                 </div>
-                {/* Quote */}
-                <p className="text-slate-300 text-sm leading-relaxed flex-1 mb-5">"{t.text}"</p>
-                {/* Author */}
-                <div className="flex items-center gap-3 pt-4 border-t border-white/10">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 flex items-center justify-center text-xl border border-white/10 shrink-0">
+                <p className="text-sm leading-relaxed flex-1 mb-4" style={{ color: '#4B5563' }}>"{t.text}"</p>
+                <div className="flex items-center gap-3 pt-3" style={{ borderTop: '1px solid #F3F4F6' }}>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl shrink-0"
+                    style={{ background: '#EEF2FF', border: '2px solid #C7D2FE' }}>
                     {t.avatar}
                   </div>
                   <div>
-                    <p className="text-white font-semibold text-sm">{t.name}</p>
-                    <p className="text-slate-400 text-xs">{t.role}</p>
-                    <p className="text-blue-400 text-xs">{t.university || t.company}</p>
+                    <p className="font-bold text-sm" style={{ color: '#1E1B4B' }}>{t.name}</p>
+                    <p className="text-xs" style={{ color: '#6B7280' }}>{t.role}</p>
+                    <p className="text-xs font-medium" style={{ color: '#4F46E5' }}>{t.org}</p>
                   </div>
                 </div>
               </div>
@@ -290,18 +220,18 @@ export default function Home() {
       {!user && (
         <section className="py-20 px-6">
           <div className="max-w-3xl mx-auto text-center glass p-12"
-            style={{ borderColor: 'rgba(168,85,247,0.3)', background: 'linear-gradient(135deg, rgba(124,58,237,0.15), rgba(249,115,22,0.1))' }}>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Get Started?</h2>
-            <p className="mb-8" style={{ color: '#c4b5fd' }}>Join thousands of students and companies already using IILMS.</p>
+            style={{ background: 'linear-gradient(135deg, #EEF2FF, #F5F3FF)', borderColor: '#C7D2FE' }}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1E1B4B' }}>Ready to Get Started?</h2>
+            <p className="mb-8" style={{ color: '#6B7280' }}>Join thousands of students and companies already using IILMS.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/register?role=student"
                 className="px-6 py-3 rounded-xl text-white font-semibold hover:scale-105 transition-all"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)', boxShadow: '0 4px 20px rgba(124,58,237,0.4)' }}>
+                style={{ background: 'linear-gradient(135deg, #4F46E5, #7C3AED)', boxShadow: '0 4px 16px rgba(79,70,229,0.3)' }}>
                 🎓 Register as Student
               </Link>
               <Link to="/register?role=company"
                 className="px-6 py-3 rounded-xl font-semibold hover:scale-105 transition-all"
-                style={{ background: 'linear-gradient(135deg, rgba(249,115,22,0.2), rgba(234,179,8,0.15))', border: '1px solid rgba(249,115,22,0.4)', color: '#fed7aa' }}>
+                style={{ background: '#FFFFFF', border: '2px solid #FED7AA', color: '#EA580C' }}>
                 🏢 Register as Company
               </Link>
             </div>
